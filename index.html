@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>18. rođendan – Hvala vam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-soft: #141414;
+            --gold: #d4af37;
+            --gold-soft: #f1d27a;
+            --white: #f8f8f8;
+            --muted: rgba(255, 255, 255, 0.72);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Merriweather', sans-serif;
+            background: #000000;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+        }
+
+        .sparkles,
+        .balloons {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.9);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.65);
+            animation: twinkle 3.5s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.15;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -180px;
+            width: 72px;
+            height: 92px;
+            border-radius: 50% 50% 45% 45%;
+            opacity: 0.9;
+            animation: floatUp linear infinite;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+        }
+
+        .balloon::before {
+            content: "";
+            position: absolute;
+            inset: 10px 18px 32px 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), transparent 55%);
+            opacity: 0.6;
+        }
+
+        /* 
+    .balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -48px;
+      width: 2px;
+      height: 52px;
+      background: rgba(255,255,255,0.35);
+      transform: translateX(-50%);
+    } */
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.95;
+            }
+
+            50% {
+                transform: translateY(-50vh) translateX(18px) rotate(3deg);
+            }
+
+            100% {
+                transform: translateY(-120vh) translateX(-18px) rotate(-4deg);
+                opacity: 0;
+            }
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 980px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            border-radius: 32px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(14px);
+            padding: 42px 28px;
+            text-align: center;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(212, 175, 55, 0.08) 50%, transparent 100%);
+            transform: translateX(-100%);
+            animation: shine 8s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            55%,
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .label {
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            font-size: 11px;
+            color: rgba(241, 210, 122, 0.88);
+            margin-bottom: 22px;
+        }
+
+        .line {
+            width: 90px;
+            height: 1px;
+            margin: 0 auto 24px;
+            background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.9), transparent);
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            line-height: 0.95;
+            font-weight: 700;
+            color: #fff8e7;
+            text-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+        }
+
+        .sub {
+            margin: 18px auto 0;
+            max-width: 740px;
+            font-size: clamp(1rem, 2.4vw, 1.3rem);
+            line-height: 1.8;
+        }
+
+        .party {
+            margin-top: 22px;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            color: var(--gold-soft);
+        }
+
+        .names {
+            margin-top: 10px;
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold);
+            letter-spacing: 0.04em;
+        }
+
+        .desc {
+            margin: 20px auto 0;
+            max-width: 700px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .cta-wrap {
+            margin-top: 38px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cta-bottom-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 58px;
+            padding: 0 30px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: #0f0f0f;
+            font-weight: 700;
+            font-size: 0.98rem;
+            background: linear-gradient(135deg, #f3d77a 0%, #d4af37 45%, #b88a1c 100%);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 18px 40px rgba(212, 175, 55, 0.36);
+            filter: brightness(1.03);
+        }
+
+        .google-photos-icon {
+            background-image: url(assets/google-photos.svg);
+            background-position: center;
+            height: 2em;
+            width: 2em;
+        }
+
+        .hint {
+            margin-top: 14px;
+            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.58);
+        }
+
+        .footer-note {
+            margin-top: 26px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.68);
+        }
+
+        .author-cta {
+            color: rgba(255, 0, 208, 0.68);
+            font-weight: 600;
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        .author {
+            color: rgba(255, 0, 208, 0.68);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 28px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 0.88rem;
+            backdrop-filter: blur(8px);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px;
+            }
+
+            .card {
+                padding: 34px 20px;
+                border-radius: 24px;
+            }
+
+            .label {
+                letter-spacing: 0.22em;
+            }
+
+            .balloon {
+                width: 54px;
+                height: 70px;
+            }
+        }
+
+        .video-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s ease;
+        }
+
+        .video-popup.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .video-box {
+            width: min(92vw, 520px);
+            max-height: 88vh;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid rgba(212, 175, 55, .35);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .55);
+            position: relative;
+        }
+
+        .video-box video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+            background: rgba(0, 0, 0, .55);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sparkles" id="sparkles"></div>
+    <div class="balloons" id="balloons"></div>
+    <div id="videoPopup" class="video-popup">
+        <div class="video-box">
+            <button id="closeVideo" class="close-btn">✕</button>
+
+            <video id="popupVideo" playsinline controls autoplay>
+                <source src="assets/video.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+
+    <main class="wrap">
+        <section class="card">
+            <p class="label">MAŠA I VUKAŠIN | Proslava 18. rođendana | 18.4.2026.</p>
+            <div class="line"></div>
+
+            <h1>Hvala što ste bili deo našeg slavlja!</h1>
+
+            <p class="sub">
+                Učinili ste da ova noć bude još luđa, lepša i nezaboravna. Hvala vam na energiji,
+                smehu, zagrljajima i uspomenama koje ćemo pamtiti baš dugo.
+            </p>
+
+            <!-- <p class="party">Dva osamnaesta. Jedna brutalna žurka.</p> -->
+
+            <p class="desc">
+                Ako imate slike, klipove ili neke top momente sa proslave, ubacite ih klikom na dugme ispod
+                da imamo sve uspomene na jednom mestu.
+            </p>
+
+            <div class="cta-wrap">
+                <a class="cta"
+                    href="https://herbal-sponsored-outdoors-strength.trycloudflare.com/share/ySz7HDZvyQy7sI9BiXK92XF0AXECo1yKzvSmQ147ViPOKWv-HqMOmryLThfZnW6xZIA"
+                    target="_blank" rel="noreferrer">
+                    Dodaj slike sa žurke
+                </a>
+            </div>
+            <div>
+                <p>ili</p>
+            </div>
+            <div class="cta-bottom-wrap">
+                <a class="cta" href="https://photos.app.goo.gl/xLo3BZ6wV5cMBJSp7" target="_blank" rel="noreferrer">
+                    <span class="google-photos-icon"></span>
+                    Ubaci na Google Photos
+                </a>
+            </div>
+
+            <p class="footer-note">Do neke sledeće žurke ✨</p>
+
+        </section>
+        <p class="author-cta">Powered by <a href="https://pozivnica.website" target="_blank"
+                class="author">pozivnica.website</a>
+        </p>
+    </main>
+
+    <script>
+        const balloonContainer = document.getElementById('balloons');
+        const sparkleContainer = document.getElementById('sparkles');
+        const balloonColors = [
+            'linear-gradient(180deg, #f4dc93 0%, #d4af37 55%, #9c7414 100%)',
+            'linear-gradient(180deg, #ffffff 0%, #efefef 55%, #cfcfcf 100%)',
+            'linear-gradient(180deg, #2a2a2a 0%, #111111 55%, #000000 100%)'
+        ];
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.animationDuration = (10 + Math.random() * 8) + 's';
+            balloon.style.animationDelay = Math.random() * 5 + 's';
+            balloon.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+            balloon.style.transform = `scale(${0.8 + Math.random() * 0.7})`;
+            balloonContainer.appendChild(balloon);
+        }
+
+        for (let i = 0; i < 14; i++) {
+            createBalloon();
+        }
+
+        function createSparkle() {
+            const sparkle = document.createElement('span');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 4 + 's';
+            sparkle.style.animationDuration = (2.2 + Math.random() * 3) + 's';
+            sparkleContainer.appendChild(sparkle);
+        }
+
+        for (let i = 0; i < 42; i++) {
+            createSparkle();
+        }
+
+        const popup = document.getElementById("videoPopup");
+        const video = document.getElementById("popupVideo");
+        const closeBtn = document.getElementById("closeVideo");
+
+        const path = window.location.pathname.toLowerCase();
+        const params = new URLSearchParams(window.location.search);
+
+        const shouldShowVideo =
+            params.get("video") === "1" ||
+            path.endsWith("/video") ||
+            path.endsWith("/show-video");
+
+        if (shouldShowVideo) {
+            setTimeout(() => {
+                popup.classList.add("show");
+                video.play().catch(() => { });
+            }, 500);
+        }
+
+
+        /* popup posle 5 sekundi */
+        // setTimeout(() => {
+        //     popup.classList.add("show");
+        //     video.play().catch(() => { });
+        // }, 500);
+
+        /* zatvori kad se zavrsi video */
+        video.addEventListener("ended", () => {
+            popup.classList.remove("show");
+        });
+
+        /* manuelno zatvaranje */
+        closeBtn.addEventListener("click", () => {
+            popup.classList.remove("show");
+            video.pause();
+            video.currentTime = 0;
+        });
+    </script>
+</body>
+
+</html>
